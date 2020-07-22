@@ -1,0 +1,15 @@
+.game-table {
+  table-layout: fixed;
+}
+
+.cell {
+  background-color: gray;
+}
+
+.cell-unclicked {
+  cursor: pointer;
+}
+
+.cell-clicked {
+  background-color: lightgray;
+}
