@@ -3,17 +3,50 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/c860183bb6.js"
+      crossorigin="anonymous"
+    ></script>
     <link rel="stylesheet" href="css/main.css" />
     <title>Mine Sweeper</title>
   </head>
-  <body onload="initGame()">
+  <body onload="initGame()" oncontextmenu="return false">
     <div class="main-container">
-      <table class="game-table" border="1" cellpadding="25">
-        <tbody class="board"></tbody>
+      <footer class="footer">
+        <h2 class="logo">
+          Mine
+          <i class="fas fa-bomb" style="color: black; opacity: 80%;"></i>
+          Sweeper
+        </h2>
+      </footer>
+      <div class="game-container">
+        <div class="game-panel">
+          <div class="lifes indicator-window"></div>
+          <div class="game-display"><p class="display-text">0 : 00</p></div>
+          <div class="hints indicator-window"></div>
+          <button onclick="useHint()" class="btn btn-hint">
+            Use Hint
+          </button>
+        </div>
+        <div class="smiley" onclick="initGame()"></div>
+        <table class="game-table" border="1" cellpadding="0">
+          <tbody class="board"></tbody>
+        </table>
+        <div class="buttons">
+          <button class="btn btn-clicked" onclick="onButtonClick(this)">
+            Easy
+          </button>
+          <button class="btn" onclick="onButtonClick(this)">Medium</button>
+          <button class="btn" onclick="onButtonClick(this)">Hard</button>
+        </div>
+      </div>
+      <table class="score-table" border="1" cellpadding="0">
+        <tbody class="score"></tbody>
       </table>
-      <button class="btn" onclick="onButtonClick(this)">Easy</button>
-      <button class="btn" onclick="onButtonClick(this)">Medium</button>
-      <button class="btn" onclick="onButtonClick(this)">Hard</button>
     </div>
 
     <script src="js/utils.js"></script>
