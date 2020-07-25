@@ -37,8 +37,8 @@ function initGame() {
   gGame.hints = 3
   gGame.isHint = false
 
-  renderPanel()
   renderBoard()
+  renderPanel()
 }
 
 function buildBoard() {
@@ -93,7 +93,7 @@ function renderBoard() {
       strHtml += `<td data-id=${i}-${j} class="cell cell-unclicked cell-color-${
         numColors[cell.minesAroundCount]
       }" onclick="cellClicked(this, ${i}, ${j})" oncontextmenu="cellMarked(this, ${i}, ${j})">
-      ${cell.isShown ? cell.minesAroundCount : cell.isMine ? MINE : ''}`
+      ${cell.isShown ? cell.minesAroundCount : ''}`
       strHtml += '</span> </td>'
     }
     strHtml += '</tr>'
