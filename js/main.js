@@ -55,7 +55,7 @@ function buildBoard() {
       board[i][j] = cell
     }
   }
-  return setRandomMines(board)
+  return board
 }
 
 function setMinesNegsCount(board, currRow, currCol) {
@@ -68,13 +68,13 @@ function setMinesNegsCount(board, currRow, currCol) {
   }
 }
 
-function setRandomMines(board) {
+function setRandomMines(board, i, j) {
   for (var i = 0; i < gLevel.MINES; i++) {
     var isMinePlaced = false
     while (!isMinePlaced) {
       var row = getRandomInt(0, gLevel.SIZE)
       var col = getRandomInt(0, gLevel.SIZE)
-      if (!board[row][col].isMine) {
+      if (!board[row][col].isMine && row !== i && col !== j) {
         board[row][col].isMine = true
         setMinesNegsCount(board, row, col)
         isMinePlaced = true
@@ -93,7 +93,7 @@ function renderBoard() {
       strHtml += `<td data-id=${i}-${j} class="cell cell-unclicked cell-color-${
         numColors[cell.minesAroundCount]
       }" onclick="cellClicked(this, ${i}, ${j})" oncontextmenu="cellMarked(this, ${i}, ${j})">
-      ${cell.isShown ? cell.minesAroundCount : ''}`
+      ${cell.isShown ? cell.minesAroundCount : cell.isMine ? MINE : ''}`
       strHtml += '</span> </td>'
     }
     strHtml += '</tr>'
@@ -119,6 +119,10 @@ function renderPanel() {
               ></i
             ></span>`
   }
+
+  strHints += `<button onclick="useHint()" class="btn btn-hint">
+            Use Hint
+          </button>`
   var elDisplay = document.querySelector('.display-text')
   elDisplay.innerText = '0 : 00'
   var elHints = document.querySelector('.hints')
@@ -130,7 +134,10 @@ function renderPanel() {
 }
 
 function cellClicked(elCell, i, j) {
-  if (!gGame.isOn) firstClick()
+  if (!gGame.isOn) {
+    firstClick('left-click', i, j)
+    return
+  }
   if (elCell.classList.contains('cell-clicked') || gBoard[i][j].isMarked) return
   if (gBoard[i][j].isMine) {
     var elLifes = document.querySelectorAll('.life')
@@ -166,6 +173,10 @@ function cellClicked(elCell, i, j) {
 
 function cellMarked(elCell, i, j) {
   if (elCell.classList.contains('cell-clicked')) return
+  if (!gGame.isOn) {
+    firstClick('right-click', i, j)
+    return
+  }
   if (!gBoard[i][j].isMarked) {
     elCell.innerHTML = FLAG
     gGame.markedCount++
@@ -173,9 +184,7 @@ function cellMarked(elCell, i, j) {
     elCell.innerHTML = ''
     gGame.markedCount--
   }
-
   gBoard[i][j].isMarked = !gBoard[i][j].isMarked
-  if (!gGame.isOn) firstClick()
   checkGameOver()
 }
 
@@ -197,9 +206,14 @@ function expandShown(currRow, currCol) {
   }
 }
 
-function firstClick() {
+function firstClick(mouseClick, i, j) {
   gGame.isOn = true
+  gBoard = setRandomMines(gBoard, i, j)
+  renderBoard()
   gTimer = setInterval(startTimer, 1000)
+  var elCell = document.querySelector(`td[data-id="${i}-${j}"]`)
+  if (mouseClick === 'left-click') cellClicked(elCell, i, j)
+  else cellMarked(elCell, i, j)
 }
 
 function startTimer() {

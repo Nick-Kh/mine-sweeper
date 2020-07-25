@@ -38,7 +38,7 @@ body {
 }
 
 .game-panel {
-  width: 80%;
+  width: 65%;
   height: 80px;
   /* background: lightgray; */
   margin: auto;
@@ -138,11 +138,8 @@ body {
 }
 
 .btn-hint {
-  position: absolute;
   background: darkgrey;
-  top: 130px;
-  left: 1130px;
-  padding: 5px;
+  margin: 15px;
   color: darkred;
 }
 
