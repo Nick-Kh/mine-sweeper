@@ -32,7 +32,6 @@ body {
 .game-container {
   margin: 20px 0 0 0;
   width: 80%;
-  /* background: darkgray; */
   text-align: center;
   margin: 20px auto;
 }
@@ -40,17 +39,14 @@ body {
 .game-panel {
   width: 65%;
   height: 80px;
-  /* background: lightgray; */
   margin: auto;
   display: flex;
   justify-content: space-around;
-  /* border: 2px solid black; */
 }
 
 .indicator-window {
   width: 20%;
   height: 45%;
-  /* border: 1px solid black; */
   background: darkgrey;
   box-shadow: 7px 6px 5px 0px rgba(0, 0, 0, 0.75);
   border-radius: 5px;
@@ -74,7 +70,6 @@ body {
 
 .cell-unclicked {
   cursor: pointer;
-  /* transition: 0.3s; */
 }
 
 .cell-unclicked:hover {
@@ -89,10 +84,6 @@ body {
 .mark-red {
   background: red;
 }
-
-/* .cell-color-transparent {
-  opacity: 0%;
-} */
 
 .cell-color-green {
   color: green;
@@ -139,8 +130,10 @@ body {
 
 .btn-hint {
   background: darkgrey;
-  margin: 15px;
   color: darkred;
+  display: block;
+  margin: 0 auto;
+  margin-top: 15px;
 }
 
 .game-display {
