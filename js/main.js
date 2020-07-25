@@ -134,7 +134,7 @@ function renderPanel() {
 }
 
 function cellClicked(elCell, i, j) {
-  if (!gGame.isOn) {
+  if (!gGame.isOn && !gGame.showCount) {
     firstClick('left-click', i, j)
     return
   }
@@ -173,7 +173,7 @@ function cellClicked(elCell, i, j) {
 
 function cellMarked(elCell, i, j) {
   if (elCell.classList.contains('cell-clicked')) return
-  if (!gGame.isOn) {
+  if (!gGame.isOn && !gGame.showCount) {
     firstClick('right-click', i, j)
     return
   }
